@@ -1,4 +1,4 @@
-import { component } from '@battr/battr-core';
+import { component, events } from '@battr/battr-core';
 
 component.define({
   selector: 'view [view]',
@@ -7,5 +7,5 @@ component.define({
   controller: controller
 });
 
-function controller(element, attrs, model) {
+function controller(element) {
 }

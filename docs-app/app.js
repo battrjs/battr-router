@@ -3,28 +3,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 
 battrCoreComponents.controller('AppController', function (model, router) {
-  router.useHash();
-  router.start();
+  // router.start();
 
   router
-    .root('/')
-    .on('/', {
+    .add('/', {
       template: '<span>one</span>',
       locals: {},
       controller: function () {
-
+        console.log('root controller')
       }
     })
-    .on('/:id', function (params) {
+    .add('/item/:id', function (params) {
+      console.log(':id', params.id)
       return {
         template: '<span>one</span>'
       };
     })
     .notFound(function () {
-      return {
-        template: '<span>not found</span>'
-      };
-    });
+      router.navigate('/');
+    })
+    .resolve();
 
   // router.navigate('/');
   // router.reload();
