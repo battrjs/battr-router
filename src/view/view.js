@@ -1,11 +1,23 @@
-import { component, events } from '@battr/battr-core';
+import { component, events, findController, bindController, unbindController } from '@battr/battr-core';
 
 component.define({
-  selector: 'view [view]',
+  selector: 'view',
   priority: 100,
   model: false,
-  controller: controller
+  postBind: postBind
 });
 
-function controller(element) {
+function postBind(element) {
+  events
+    .on('$routeChangeHandler', route => {
+      unbindController(element);
+      if (route.template) replaceHMTL(route.template);
+      if (route.controller) bindController(element, route.controller, (route.locals || {}))();
+    })
+    .handlePrevious();
+
+  function replaceHMTL(template) {
+    element.empty();
+    element.appendChild(document.createFromMarkup(template));
+  }
 }

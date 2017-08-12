@@ -7,16 +7,20 @@ battrCoreComponents.controller('AppController', function (model, router) {
 
   router
     .add('/', {
-      template: '<span>one</span>',
+      template: '<span>root ${name}</span>',
       locals: {},
-      controller: function () {
-        console.log('root controller')
+      controller: function (model) {
+        model.name = 'mode name';
       }
     })
-    .add('/item/:id', function (params) {
-      console.log(':id', params.id)
+    .add('/item', function (params) {
       return {
-        template: '<span>one</span>'
+        template: '<span>item</span>'
+      };
+    })
+    .add('/item/:id', function (params) {
+      return {
+        template: '<span>item with id</span>'
       };
     })
     .notFound(function () {

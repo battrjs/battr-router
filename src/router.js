@@ -66,7 +66,7 @@ export function resolve() {
       handler(...(_match.match.slice(1, _match.match.length))) :
       handler(_match.params, GETParameters);
   }
-  
+
   events.emit('$routeChangeHandler', routeInfo);
   events.emit('routeChangeEnd', { route: _match.route.route, path: _path });
 }
